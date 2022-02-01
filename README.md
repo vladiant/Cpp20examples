@@ -1,2 +1,4 @@
-# Cpp20examples
-C++20 code examples
+# C++20 code examples
+
+## References
+* [Nico Josuttis - C++20 - My Favorite Code Examples - Meeting C++ 2021](https://www.youtube.com/watch?v=ey4pTOfdi9k)
