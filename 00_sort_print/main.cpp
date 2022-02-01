@@ -11,7 +11,7 @@ void print(const T& rg) {
 
 struct Coord {
   double x, y, z;
-  bool operator<(const Coord& other) {
+  bool operator<(const Coord& other) const {
     if (x != other.x) {
       return x < other.x;
     }
