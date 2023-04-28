@@ -6,7 +6,8 @@
 
 auto mergeValue(const auto& rg, auto&&... vals) {
   // Create compile time vector
-  std::vector<decltype(rg)::value_type> v{rg.begin(), rg.end()};
+  using T = std::remove_cvref_t<decltype(rg)>::value_type;
+  std::vector<T> v{rg.begin(), rg.end()};
 
   (...,
    v.push_back(std::forward<decltype(vals)>(vals)));  // merge passed values
