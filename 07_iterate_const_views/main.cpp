@@ -3,7 +3,8 @@
 #include <iostream>
 #include <ranges>
 
-void print(const std::ranges::input_range auto& rg) {
+// const std::ranges::input_range auto& rg fails
+void print(std::ranges::input_range auto rg) {
   for (const auto& value : rg) {
     std::cout << value << '\n';
   }
@@ -24,6 +25,6 @@ int main() {
   std::array points{Coord{1, 2, 3}, Coord{4, 5, 6}, Coord{0, 2, 0},
                     Coord{0, 0, 2}};
   std::ranges::sort(points);
-  // print(points | std::views::filter([](auto) { return true; }));  // ERROR
+  print(points | std::views::filter([](auto) { return true; }));
   return 0;
 }
