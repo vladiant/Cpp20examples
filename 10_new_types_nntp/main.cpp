@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <array>
 #include <chrono>
-#include <format>
 #include <iostream>
 
 namespace chr = std::chrono;
@@ -15,7 +14,7 @@ void print(std::ranges::input_range auto&& rg) {
     }
     // telco at noon local time
     auto tpTelco{chr::local_days{day} + 12h};
-    chr::zoned_time telcoLocal{chr::current_zone{}, tpTelco};
+    chr::zoned_time telcoLocal{chr::current_zone(), tpTelco};
     for (auto tzName : {"Europe/Berlin", "America/Los_Angeles"}) {
       chr::zoned_time zt{tzName, telcoLocal};
       std::cout << std::format(" {:%D %R %Z}\n", zt);
