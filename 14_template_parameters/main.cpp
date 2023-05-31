@@ -7,7 +7,8 @@
 template <typename T, typename... Args>
 auto mergeValue(const T& rg, Args&&... vals) {
   // Create compile time vector
-  std::vector<T::value_type> v{rg.begin(), rg.end()};
+  using DataT = std::remove_cvref_t<decltype(rg)>::value_type;
+  std::vector<DataT> v{rg.begin(), rg.end()};
 
   (...,
    v.push_back(std::forward<decltype(vals)>(vals)));  // merge passed values
