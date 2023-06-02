@@ -5,7 +5,8 @@
 #include <vector>
 
 template <typename T, typename... Args>
-consteval auto mergeValue(const T& rg, Args&&... vals) {
+// cannot be const T& rg
+consteval auto mergeValue(T rg, Args&&... vals) {
   // Create compile time vector
   std::vector<std::ranges::range_value_t<T>> v{std::ranges::begin(rg),
                                                std::ranges::end(rg)};
