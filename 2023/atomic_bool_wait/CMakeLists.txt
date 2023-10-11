@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(00_sample)
+project(atomic_bool_wait)
 
 find_package(Threads REQUIRED)
 
