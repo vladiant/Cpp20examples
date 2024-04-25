@@ -5,21 +5,19 @@
 #include <queue>
 #include <utility>
 
-
 struct Task {
-
   struct promise_type {
     std::suspend_always initial_suspend() noexcept { return {}; }
     std::suspend_always final_suspend() noexcept { return {}; }
 
-    Task get_return_object() { 
-        return std::coroutine_handle<promise_type>::from_promise(*this); 
+    Task get_return_object() {
+      return std::coroutine_handle<promise_type>::from_promise(*this);
     }
     void return_void() {}
     void unhandled_exception() {}
   };
 
-  Task(std::coroutine_handle<promise_type> handle): handle{handle}{}
+  Task(std::coroutine_handle<promise_type> handle) : handle{handle} {}
 
   auto get_handle() { return handle; }
 
@@ -31,30 +29,26 @@ using job = std::pair<int, std::coroutine_handle<>>;
 template <typename Comparator = std::ranges::less>
 requires std::predicate<decltype(Comparator()), job, job>
 class Scheduler {
-
   std::priority_queue<job, std::vector<job>, Comparator> _prioTasks;
 
-  public: 
+ public:
+  void emplace(int prio, std::coroutine_handle<> task) {
+    _prioTasks.push(std::make_pair(prio, task));
+  }
 
-    void emplace(int prio, std::coroutine_handle<> task) {
-      _prioTasks.push(std::make_pair(prio, task));
-    }
+  void schedule() {
+    while (!_prioTasks.empty()) {
+      auto [prio, task] = _prioTasks.top();
+      _prioTasks.pop();
+      task.resume();
 
-    void schedule() {
-      while(!_prioTasks.empty()) {
-        auto [prio, task] = _prioTasks.top();
-        _prioTasks.pop();
-        task.resume();
-
-        if(!task.done()) { 
-          _prioTasks.push(std::make_pair(prio, task));
-        }
-        else {
-          task.destroy();
-        }
+      if (!task.done()) {
+        _prioTasks.push(std::make_pair(prio, task));
+      } else {
+        task.destroy();
       }
     }
-
+  }
 };
 
 Task createTask(const std::string& name) {
@@ -62,12 +56,10 @@ Task createTask(const std::string& name) {
   co_await std::suspend_always();
   std::cout << name << " execute\n";
   co_await std::suspend_always();
-   std::cout << name << " finish\n";
+  std::cout << name << " finish\n";
 }
 
-
 int main() {
-
   std::cout << '\n';
 
   Scheduler scheduler1;
@@ -87,5 +79,4 @@ int main() {
   scheduler2.schedule();
 
   std::cout << '\n';
-
 }

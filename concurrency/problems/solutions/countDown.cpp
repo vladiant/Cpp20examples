@@ -1,9 +1,8 @@
+#include <chrono>
 #include <iostream>
 #include <thread>
-#include <chrono>
 
 int main() {
-
   std::cout << '\n';
 
   for (int i = 10; i > 0; --i) {
@@ -12,5 +11,4 @@ int main() {
   }
 
   std::cout << '\n';
-
 }
