@@ -3,21 +3,19 @@
 #include <queue>
 #include <utility>
 
-
 struct Task {
-
   struct promise_type {
     std::suspend_always initial_suspend() noexcept { return {}; }
     std::suspend_always final_suspend() noexcept { return {}; }
 
-    Task get_return_object() { 
-        return std::coroutine_handle<promise_type>::from_promise(*this); 
+    Task get_return_object() {
+      return std::coroutine_handle<promise_type>::from_promise(*this);
     }
     void return_void() {}
     void unhandled_exception() {}
   };
 
-  Task(std::coroutine_handle<promise_type> handle): handle{handle}{}
+  Task(std::coroutine_handle<promise_type> handle) : handle{handle} {}
 
   auto get_handle() { return handle; }
 
@@ -25,35 +23,29 @@ struct Task {
 };
 
 class Scheduler {
-
   std::priority_queue<std::pair<int, std::coroutine_handle<>>> _prioTasks;
 
-  public: 
+ public:
+  void emplace(int prio, std::coroutine_handle<> task) {
+    _prioTasks.push(std::make_pair(prio, task));
+  }
 
-    void emplace(int prio, std::coroutine_handle<> task) {
-      _prioTasks.push(std::make_pair(prio, task));
-    }
+  void schedule() {
+    while (!_prioTasks.empty()) {
+      auto [prio, task] = _prioTasks.top();
+      _prioTasks.pop();
+      task.resume();
 
-    void schedule() {
-      while(!_prioTasks.empty()) {
-        auto [prio, task] = _prioTasks.top();
-        _prioTasks.pop();
-        task.resume();
-
-        if(!task.done()) { 
-          _prioTasks.push(std::make_pair(prio, task));
-        }
-        else {
-          task.destroy();
-        }
+      if (!task.done()) {
+        _prioTasks.push(std::make_pair(prio, task));
+      } else {
+        task.destroy();
       }
     }
+  }
 
-    auto suspend() {
-      return std::suspend_always{};
-    }
+  auto suspend() { return std::suspend_always{}; }
 };
-
 
 Task TaskA(Scheduler& sch) {
   std::cout << "Hello from TaskA\n";
@@ -71,9 +63,7 @@ Task TaskB(Scheduler& sch) {
   std::cout << "TaskB is finished\n";
 }
 
-
 int main() {
-
   std::cout << '\n';
 
   Scheduler scheduler1;
@@ -93,5 +83,4 @@ int main() {
   scheduler2.schedule();
 
   std::cout << '\n';
-
 }

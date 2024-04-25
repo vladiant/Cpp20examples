@@ -3,35 +3,30 @@
 #include <atomic>
 #include <thread>
 
-class Spinlock{
+class Spinlock {
   std::atomic_flag flag = ATOMIC_FLAG_INIT;
-public:
 
-  void lock(){
-    while( flag.test_and_set() );
+ public:
+  void lock() {
+    while (flag.test_and_set())
+      ;
   }
 
-  void unlock(){
-    flag.clear();
-  }
-  
+  void unlock() { flag.clear(); }
 };
 
 Spinlock spin;
 
-void workOnResource(){
+void workOnResource() {
   spin.lock();
   // shared resource
   spin.unlock();
 }
 
-
-int main(){
-
+int main() {
   std::thread t(workOnResource);
   std::thread t2(workOnResource);
 
   t.join();
   t2.join();
-
 }
