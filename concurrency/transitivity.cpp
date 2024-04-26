@@ -7,23 +7,24 @@ std::vector<int> mySharedWork;
 std::atomic<bool> dataProduced(false);
 std::atomic<bool> dataConsumed(false);
 
-void dataProducer(){
-    mySharedWork = {1,0,3};
-    dataProduced.store(true, std::memory_order_release);
+void dataProducer() {
+  mySharedWork = {1, 0, 3};
+  dataProduced.store(true, std::memory_order_release);
 }
 
-void deliveryBoy(){
-    while(!dataProduced.load(std::memory_order_acquire));
-    dataConsumed.store(true, std::memory_order_release);
+void deliveryBoy() {
+  while (!dataProduced.load(std::memory_order_acquire))
+    ;
+  dataConsumed.store(true, std::memory_order_release);
 }
 
-void dataConsumer(){
-    while(!dataConsumed.load(std::memory_order_acquire));
-    mySharedWork[1] = 2;
+void dataConsumer() {
+  while (!dataConsumed.load(std::memory_order_acquire))
+    ;
+  mySharedWork[1] = 2;
 }
 
-int main(){
-    
+int main() {
   std::cout << '\n';
 
   std::thread t1(dataConsumer);
@@ -33,11 +34,10 @@ int main(){
   t1.join();
   t2.join();
   t3.join();
-  
-  for (auto v: mySharedWork){
-      std::cout << v << " ";
+
+  for (auto v : mySharedWork) {
+    std::cout << v << " ";
   }
-      
+
   std::cout << "\n\n";
-  
 }

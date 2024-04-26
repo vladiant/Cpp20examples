@@ -7,23 +7,22 @@
 std::vector<int> mySharedWork;
 std::atomic<bool> dataReady(false);
 
-void waitingForWork(){
-    std::cout << "Waiting " << '\n';
-    while ( !dataReady.load() ){
-        std::this_thread::sleep_for(std::chrono::milliseconds(5));
-    }
-    mySharedWork[1] = 2;
-    std::cout << "Work done " << '\n';
+void waitingForWork() {
+  std::cout << "Waiting " << '\n';
+  while (!dataReady.load()) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(5));
+  }
+  mySharedWork[1] = 2;
+  std::cout << "Work done " << '\n';
 }
 
-void setDataReady(){
-    mySharedWork = {1, 0, 3};
-    dataReady = true;
-    std::cout << "Data prepared" << '\n';
+void setDataReady() {
+  mySharedWork = {1, 0, 3};
+  dataReady = true;
+  std::cout << "Data prepared" << '\n';
 }
 
-int main(){
-    
+int main() {
   std::cout << '\n';
 
   std::thread t1(waitingForWork);
@@ -31,12 +30,10 @@ int main(){
 
   t1.join();
   t2.join();
-  
-  for (auto v: mySharedWork){
-      std::cout << v << " ";
+
+  for (auto v : mySharedWork) {
+    std::cout << v << " ";
   }
-      
-  
+
   std::cout << "\n\n";
-  
 }

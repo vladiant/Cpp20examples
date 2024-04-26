@@ -1,20 +1,19 @@
-#include <utility>
+#include <deque>
 #include <future>
 #include <iostream>
 #include <thread>
-#include <deque>
+#include <utility>
 
-class SumUp{
-  public:
-    int operator()(int beg, int end){
-      long long int sum{0};
-      for (int i = beg; i < end; ++i ) sum += i;
-      return sum;
-    }
+class SumUp {
+ public:
+  int operator()(int beg, int end) {
+    long long int sum{0};
+    for (int i = beg; i < end; ++i) sum += i;
+    return sum;
+  }
 };
 
-int main(){
-
+int main() {
   std::cout << '\n';
 
   SumUp sumUp1;
@@ -35,18 +34,18 @@ int main(){
   std::future<int> sumResult4 = sumTask4.get_future();
 
   // push the tasks on the container
-  std::deque<std::packaged_task<int(int,int)>> allTasks;
+  std::deque<std::packaged_task<int(int, int)>> allTasks;
   allTasks.push_back(std::move(sumTask1));
   allTasks.push_back(std::move(sumTask2));
   allTasks.push_back(std::move(sumTask3));
   allTasks.push_back(std::move(sumTask4));
-  
+
   int begin{1};
   int increment{2500};
   int end = begin + increment;
 
   // perform each calculation in a separate thread
-  while (not allTasks.empty()){
+  while (not allTasks.empty()) {
     std::packaged_task<int(int, int)> myTask = std::move(allTasks.front());
     allTasks.pop_front();
     std::thread sumThread(std::move(myTask), begin, end);
@@ -56,11 +55,10 @@ int main(){
   }
 
   // pick up the results
-  auto sum = sumResult1.get() + sumResult2.get() + 
-             sumResult3.get() + sumResult4.get();
+  auto sum =
+      sumResult1.get() + sumResult2.get() + sumResult3.get() + sumResult4.get();
 
   std::cout << "sum of 0 .. 10000 = " << sum << '\n';
 
   std::cout << '\n';
-
 }

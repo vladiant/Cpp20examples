@@ -6,37 +6,37 @@
 #include <string>
 #include <thread>
 
-std::map<std::string, int> teleBook{{"Dijkstra", 1972}, {"Scott", 1976}, {"Ritchie", 1983}};
+std::map<std::string, int> teleBook{
+    {"Dijkstra", 1972}, {"Scott", 1976}, {"Ritchie", 1983}};
 
 std::shared_timed_mutex teleBookMutex;
 
-void addToTeleBook(const std::string& na,  int tele){
+void addToTeleBook(const std::string& na, int tele) {
   std::lock_guard<std::shared_timed_mutex> writerLock(teleBookMutex);
   std::cout << "\nSTARTING UPDATE " << na;
   std::this_thread::sleep_for(std::chrono::milliseconds(500));
-  teleBook[na]= tele;
+  teleBook[na] = tele;
   std::cout << " ... ENDING UPDATE " << na << '\n';
 }
 
-void printNumber(const std::string& na){
+void printNumber(const std::string& na) {
   std::shared_lock<std::shared_timed_mutex> readerLock(teleBookMutex);
   std::cout << na << ": " << teleBook[na] << '\n';
 }
 
-int main(){
-
+int main() {
   std::cout << '\n';
 
-  std::thread reader1([]{ printNumber("Scott"); });
-  std::thread reader2([]{ printNumber("Ritchie"); });
-  std::thread w1([]{ addToTeleBook("Scott", 1968); });
-  std::thread reader3([]{ printNumber("Dijkstra"); });
-  std::thread reader4([]{ printNumber("Scott"); });
-  std::thread w2([]{ addToTeleBook("Bjarne", 1965); });
-  std::thread reader5([]{ printNumber("Scott"); });
-  std::thread reader6([]{ printNumber("Ritchie"); });
-  std::thread reader7([]{ printNumber("Scott"); });
-  std::thread reader8([]{ printNumber("Bjarne"); });
+  std::thread reader1([] { printNumber("Scott"); });
+  std::thread reader2([] { printNumber("Ritchie"); });
+  std::thread w1([] { addToTeleBook("Scott", 1968); });
+  std::thread reader3([] { printNumber("Dijkstra"); });
+  std::thread reader4([] { printNumber("Scott"); });
+  std::thread w2([] { addToTeleBook("Bjarne", 1965); });
+  std::thread reader5([] { printNumber("Scott"); });
+  std::thread reader6([] { printNumber("Ritchie"); });
+  std::thread reader7([] { printNumber("Scott"); });
+  std::thread reader8([] { printNumber("Bjarne"); });
 
   reader1.join();
   reader2.join();
@@ -52,11 +52,9 @@ int main(){
   std::cout << '\n';
 
   std::cout << "\nThe new telephone book" << '\n';
-  for (auto teleIt: teleBook){
+  for (auto teleIt : teleBook) {
     std::cout << teleIt.first << ": " << teleIt.second << '\n';
   }
 
   std::cout << '\n';
-
 }
-
