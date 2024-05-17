@@ -4,8 +4,8 @@
 using namespace std::chrono;
 
 int main() {
-  //auto firstDay = 2021y / 1 / 31;
-  auto firstDay = 2021y/1/std::chrono::last;
+  // auto firstDay = 2021y / 1 / 31;
+  auto firstDay = 2021y / 1 / std::chrono::last;
 
   auto lastDay = 12 / 31d / 2021;
 

@@ -8,9 +8,8 @@ concept HasPushBack = requires(Coll c, std::ranges::range_value_t<Coll> v) {
   c.push_back(v);
 };
 
-void add(
-    auto& col,
-    const auto& val) requires HasPushBack<std::remove_cvref_t<decltype(col)>> {
+void add(auto& col, const auto& val) requires
+    HasPushBack<std::remove_cvref_t<decltype(col)>> {
   col.push_back(val);
 }
 

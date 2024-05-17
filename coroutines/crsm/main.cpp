@@ -1,7 +1,7 @@
 #include <coroutine>
 #include <iostream>
 
-// Coroutine State Machine 
+// Coroutine State Machine
 
 // Compiles with: GCC 11.1 (GCC 10.2 -fcoroutines), Clang 15.0.0, msvc 19.30
 

@@ -7,7 +7,8 @@ concept CanPushBack = requires(TColl c, T v) {
   c.push_back(v);
 };
 
-void add(auto& col, const auto& val) requires CanPushBack<decltype(col), decltype(val)> {
+void add(auto& col,
+         const auto& val) requires CanPushBack<decltype(col), decltype(val)> {
   col.push_back(val);
 }
 

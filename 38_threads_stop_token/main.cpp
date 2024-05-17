@@ -14,8 +14,8 @@ void randomInitOld(T& values) {
   }
 }
 
-void randomInit(std::ranges::forward_range auto& values) requires std::integral<
-    std::ranges::range_value_t<decltype(values)>> {
+void randomInit(std::ranges::forward_range auto& values) requires
+    std::integral<std::ranges::range_value_t<decltype(values)>> {
   auto init = [&](std::stop_token st) {
     std::random_device rd;
     std::default_random_engine dre{rd()};

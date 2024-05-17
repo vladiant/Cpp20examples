@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
-#include <vector>
 #include <thread>
+#include <vector>
 
 template <typename T>
 void randomInitOld(T& values) {
@@ -14,8 +14,8 @@ void randomInitOld(T& values) {
   }
 }
 
-void randomInit(std::ranges::forward_range auto& values) requires std::integral<
-    std::ranges::range_value_t<decltype(values)>> {
+void randomInit(std::ranges::forward_range auto& values) requires
+    std::integral<std::ranges::range_value_t<decltype(values)>> {
   auto init = [&] {
     std::random_device rd;
     std::default_random_engine dre{rd()};
@@ -25,9 +25,9 @@ void randomInit(std::ranges::forward_range auto& values) requires std::integral<
       v += random(dre);
     }
   };
-  
+
   std::vector<std::jthread> threads;
-  for(int i = 0; i < 5; i++) {
+  for (int i = 0; i < 5; i++) {
     threads.push_back(std::jthread{init});
   }
 }

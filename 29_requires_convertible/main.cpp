@@ -4,8 +4,8 @@
 #include <vector>
 
 template <std::ranges::range Coll, typename T>
-void add(Coll& col, const T& val) requires std::convertible_to<
-    T, std::ranges::range_value_t<Coll>> {
+void add(Coll& col, const T& val) requires
+    std::convertible_to<T, std::ranges::range_value_t<Coll>> {
   if constexpr (requires { col.push_back(val); }) {
     col.push_back(val);
   } else {

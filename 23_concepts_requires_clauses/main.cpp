@@ -7,9 +7,8 @@ concept HasPushBack = requires(Coll c, Coll::value_type v) {
   c.push_back(v);
 };
 
-void add(
-    auto& col,
-    const auto& val) requires HasPushBack<std::remove_cvref_t<decltype(col)>> {
+void add(auto& col, const auto& val) requires
+    HasPushBack<std::remove_cvref_t<decltype(col)>> {
   col.push_back(val);
 }
 
