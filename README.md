@@ -8,3 +8,4 @@
 * [Compiler support for C++20](https://en.cppreference.com/w/cpp/compiler_support/20)
 * [Nicolai M. Josuttis: C++20 - The Complete Guide](https://www.cppstd20.com/)
 * [C++ Standards Support in GCC](https://gcc.gnu.org/projects/cxx-status.html)
+* [C++ Support in Clang](https://clang.llvm.org/cxx_status.html)
