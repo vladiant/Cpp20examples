@@ -1,4 +1,6 @@
 // onlineClass.cpp
+// https://godbolt.org/z/PvrrYe4qb
+// gcc 13.1
 
 #include <algorithm>
 #include <chrono>
@@ -34,12 +36,10 @@ void printStartEndTimes(const std::chrono::local_days& localDay,
               << ", " << getMinutes(std::chrono::zoned_time(timeZone, endDate))
               << "]" << '\n';
 
-    /*
     std::cout << std::vformat("  {:} [{:}, {:}]\n",
                                     std::make_format_args(timeZone,
                                     getMinutes(std::chrono::zoned_time(timeZone,
     startDate)), getMinutes(std::chrono::zoned_time(timeZone, endDate)) ) );
-    */
   }
 }
 

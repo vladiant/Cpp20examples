@@ -1,4 +1,6 @@
 // formatArgumentID.cpp
+// https://godbolt.org/z/KdPfaEcxK
+// gcc 13.1
 
 #include <format>
 #include <iostream>

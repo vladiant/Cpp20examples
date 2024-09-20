@@ -6,7 +6,8 @@
 template <typename T, typename... Args>
 auto mergeValue(const T& rg, Args&&... vals) {
   // Create compile time vector
-  std::vector<T::value_type> v{rg.begin(), rg.end()};
+  using ElemT = T::value_type;
+  std::vector<ElemT> v{rg.begin(), rg.end()};
 
   (..., v.push_back(std::forward<Args>(vals)));  // merge passed values
 

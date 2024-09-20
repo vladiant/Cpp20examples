@@ -1,3 +1,5 @@
+// https://godbolt.org/z/5e5YTT4M5
+// gcc 13.1
 #include <algorithm>
 #include <array>
 #include <chrono>

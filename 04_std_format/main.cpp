@@ -1,3 +1,5 @@
+// https://godbolt.org/z/468rb73jM
+// gcc 13.1
 #include <algorithm>
 #include <array>
 #include <format>

@@ -1,4 +1,6 @@
 // timeOfDay.cpp
+// https://godbolt.org/z/T7bGvsrY9
+// gcc 13.1
 
 #include <chrono>
 #include <format>

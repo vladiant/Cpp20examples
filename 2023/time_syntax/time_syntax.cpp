@@ -1,4 +1,6 @@
 // cuteSyntax.cpp
+// https://godbolt.org/z/PvnT6qExE
+// gcc 13.1
 
 #include <chrono>
 #include <iostream>
