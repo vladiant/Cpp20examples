@@ -8,3 +8,4 @@
 * <https://github.com/peshe/CPP20_CoRo>
 * [C++ Coroutines and Structured Concurrency in Practice - Dmitry Prokoptsev - CppCon 2024](https://www.youtube.com/watch?v=aPqMQ7SXSiw)
 * <https://github.com/hudson-trading/corral>
+* [Introduction to C++ Coroutines and gRPC and How to Write Coroutine Support Code - Jonathan Storey](https://www.youtube.com/watch?v=deUbQodyaC4)
