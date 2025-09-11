@@ -7,3 +7,4 @@
 * [The Importance of the C++ Build System Target Model - Bill Hoffman - C++Now 2024](https://www.youtube.com/watch?v=bQQMCdIsjgw)
 * <https://godbolt.org/z/KznT85hTf>
 * <https://github.com/iboB/cpp-modules-sandbox/>
+* <https://github.com/ComicSansMS/CMake_Modules>
