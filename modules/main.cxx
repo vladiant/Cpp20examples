@@ -1,7 +1,12 @@
 import foo;
 
 int main() {
-    foo f;
-    f.helloworld();
-    return 0;
+  foo f;
+  f.helloworld();
+
+  // hidden(); // Error: note: declaration here is not visible
+
+  printMessage();
+
+  return 0;
 }

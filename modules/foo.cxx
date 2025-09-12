@@ -6,12 +6,18 @@ module;
 export module foo;
 
 export class foo {
-   public:
-    foo();
-    ~foo();
-    void helloworld();
+ public:
+  foo();
+  ~foo();
+  void helloworld();
 };
 
 foo::foo() = default;
 foo::~foo() = default;
 void foo::helloworld() { std::cout << "hello world\n"; }
+
+int hidden() { return 42; }
+
+export void printMessage() {
+  std::cout << "The hidden value is " << hidden() << "\n";
+}
