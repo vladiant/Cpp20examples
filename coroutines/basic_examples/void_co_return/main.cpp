@@ -8,6 +8,8 @@ struct Task {
   struct promise_type {
     Task get_return_object() { return {}; }
     auto initial_suspend() { return std::suspend_never{}; }
+    // Almost always suspend from final suspend
+    // Use suspend_never when no field in Task is accessed
     auto final_suspend() noexcept { return std::suspend_always{}; }
     void unhandled_exception() { std::abort(); }
     void return_void() {}
