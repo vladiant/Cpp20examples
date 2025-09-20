@@ -1,4 +1,5 @@
 #include <coroutine>
+#include <exception>
 #include <iostream>
 #include <source_location>  // ScopedLogger
 
@@ -47,10 +48,22 @@ struct Task {
       LOGF();
       return std::suspend_always{};
     }
+
     void unhandled_exception() {
       LOGF();
-      std::abort();
+      // Exception is caught
+      log("uncaught_exceptions() ", std::uncaught_exceptions(), '\n');
+
+      auto eptr = std::current_exception();
+      try {
+        if (eptr) std::rethrow_exception(eptr);
+      } catch (const std::exception& e) {
+        std::cout << "Caught exception: '" << e.what() << "'\n";
+      }
+
+      // std::abort();
     }
+
     void return_void() { LOGF(); }
   };
 };
