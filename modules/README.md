@@ -9,3 +9,4 @@
 * <https://github.com/iboB/cpp-modules-sandbox/>
 * <https://github.com/ComicSansMS/CMake_Modules>
 * <https://github.com/erwinacher/modules-cpp23-hello>
+* <https://github.com/JRASoftware/cpp23-import-std-guide>
