@@ -12,3 +12,4 @@
 * [What Is a Range in C++? - Šimon Tóth - C++ on Sea 2024](https://www.youtube.com/watch?v=UsyA7zEC0DE), [code] (https://github.com/HappyCerberus/what-is-a-range) - When taking range as argument, always use universal reference.
 * <https://github.com/HappyCerberus/book-cpp-algorithms>
 * <https://github.com/HappyCerberus/daily-bite-cpp>
+* [Exploring C++20 std::chrono - Calendar Types](https://www.cppstories.com/2025/chrono-calendar-types/)
