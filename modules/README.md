@@ -11,3 +11,4 @@
 * <https://github.com/erwinacher/modules-cpp23-hello>
 * <https://github.com/JRASoftware/cpp23-import-std-guide>
 * [C++20 Modules: Best Practices from a User's Perspective](https://chuanqixu9.github.io/c++/2025/12/30/C++20-Modules-Best-Practices.en.html)
+* [Knockin' on Header's Door: An Overview of C++ Modules - Alexsandro Thomas - CppCon 2025](https://www.youtube.com/watch?v=fZrDG_he9sE), <https://github.com/northy?tab=repositories>
