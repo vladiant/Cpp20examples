@@ -12,3 +12,4 @@
 * <https://github.com/JRASoftware/cpp23-import-std-guide>
 * [C++20 Modules: Best Practices from a User's Perspective](https://chuanqixu9.github.io/c++/2025/12/30/C++20-Modules-Best-Practices.en.html)
 * [Knockin' on Header's Door: An Overview of C++ Modules - Alexsandro Thomas - CppCon 2025](https://www.youtube.com/watch?v=fZrDG_he9sE), <https://github.com/northy?tab=repositories>
+* [The compilation procedure for C++20 modules](https://holyblackcat.github.io/blog/2026/03/09/compiling-modules.html) , <https://github.com/HolyBlackCat/modules-makefile>
